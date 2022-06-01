@@ -1,0 +1,17 @@
+.card {
+    width: 300px;
+    margin: 20px auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.titleCard {
+    background-color: #1111;
+}
+
+.listCard {
+    text-align: justify;
+    list-style: none;
+}

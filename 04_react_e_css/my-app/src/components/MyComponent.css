@@ -1,0 +1,21 @@
+p {
+  color: green;
+  background-color: #000;
+}
+
+.my-css-component {
+  color: #000;
+  background-color: gold;
+}
+
+.red-title {
+  background-color: #000;
+  color: red;
+  padding: 15px;
+  border: 5px solid red;
+}
+
+.title {
+  background-color: #000;
+  color: white;
+}
