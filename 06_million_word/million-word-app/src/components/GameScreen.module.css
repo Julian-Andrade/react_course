@@ -1,0 +1,9 @@
+.GameScreenGeral h1 {
+  font-size: 3.5em;
+  padding: 30px;
+  color: rgb(255, 0, 43);
+}
+
+.GameScreenGeral p {
+    margin-bottom: 2em;
+}
