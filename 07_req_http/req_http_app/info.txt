@@ -1,0 +1,337 @@
+useEffect:
+
+
+. Hook do react
+. Permite que uma determinada ação seja executada apenas uma vez
+. Isso é importante pelo fato dos componentes estarem sempre se re-renderizando
+. O useEffect possui um "array de dependências" que deve conter dados que ativem a execução da função de forma automática
+. o useEffect estará sempre presente nas "requisições assíncronas"
+
+
+Resgatando dados com React:
+
+
+. Local para salvá-los (useState)
+. Renderizar a chamada a API apenas uma vez (useEffect)
+. Execuar a requisição assíncrona (Fetch API)
+
+
+Resgatando Dados:
+
+
+# Salvar os dados, useState c/ array vazio
+const [products, setProducts] = useState([]);
+
+# Local para buscar os dados, link API
+const url = "http://localhost:3000/products";
+
+# Renderizar os dados apenas uma vez com useEffect
+useEffect(() => {
+    async function fetchData() => {
+    # Resposta da api com await fetch(url)
+    const res = await fetch(url);
+    # Transformando os dados json em arquivo JavaScript
+    const data = await res.json();
+    # Salvando estes dados na constante products
+    setProducts(data);
+    }
+    # Invoca a função fetchData
+    fetchData();
+}, []); # Não possui nenhuma dependência específica, então array vazio []
+
+# Para exibir os produtos, efetuamos um loop com map
+{products.map((product)) => ((
+    <li key={product.id}>{product.name} - R$: {product.price}</li>;
+))};
+
+
+Adicionando Dados:
+
+
+. Para adicionarmos os dados vamos precisar salvar os dados de um "form" com o useState
+. Reunir as informações em uma "função após o Submit" e enviar uma request de "POST" para a API
+. Processo parecido ao de resgate de dados, porém agora enviaremos os dados
+
+# Função para adicionar os produtos
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    # Quando os states possuem o mesmo nome da chave do objeto, não precisamos identificá-los (name: name, price: price)
+    const products = {
+        name,
+        price,
+    };
+
+    # Fazendo a requisição na API para adicionar o formulário
+    const res = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify(product); # Os dados precisam ser enviados com JSON
+    });
+};
+
+# Salvar os dados com useState, utilizamos quantos useStates forem necessários
+const [name, setName] = useState("");
+const [price, setPrice] = useState("");
+
+# Criação de um formulário para envio das informações ao bando de dados (API)
+<div>
+    <form onSubmit={handleSubmit}>
+        <label>
+            Nome:
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />;
+        </label>;
+        <label>
+            Preço:
+        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />;
+        </label>
+        <input type="button" value="Criar" />;
+    </form>;
+</div>
+
+# Carregamento dinâmico dos dados
+# Utilizamos o spread (...) para criação de um novo array
+const addedProduct = await res.json(); # Transformando os dados em objeto
+setProducts((prevProducts) => [...prevProducts, addedProduct]); # Usa o state de products para adicionar novos produtos com spread (...)
+setName(""); # Limpa o input name para adicionar novos dados
+setPrice(""); # Limpa o input price para adicionar novos dados
+
+
+Custom Hook para Fetch:
+
+
+. Dividimos funções que podem ser aproveitadas em outros hooks
+. Chamada de custom hook, criaremos para resgate de dados
+. Adicionamos os hooks na pasta "hooks"
+. Utilizamos o padrão useName
+. Basicamente criação de função e exportação
+
+# Cria-se o custom hook para evitar criar um useEffect toda vez que precisar requisitar os dados
+import { useState, useEffect } from "react";
+
+export const useFetch = (url) => { # url como propriedade para encontrar o banco da API
+    const [data, setData] = useState(null) # Para receber os dados da API, state iniciada como null
+    # useEffect para executar apenas uma vez
+    useEffect(() => {
+        const fetchData = async () => { # Cria-se uma função assíncrona para buscar os dados da API
+            const res = await fetch(url);
+            const json = await res.json();
+            setData(json);
+        }
+        fetchData(); # Chama a função para executá-la
+    }, [url]);
+
+    return { data }; # Exportamos apenas o que iremos utilizar
+}
+
+# Importamos o hook para utilizarmos na aplicação
+import { useFetch } from "./hooks/useFetch";
+
+# Utilizamos o hook e dizemos da onde iremos utilizar
+const { data } = useFetch(url); #useFetch espera uma propriedade url, "const url = caminho"
+# Pode renomear o objeto, caso queira
+const { data: items } = useFetch(url); # data agora se chama items
+# Utilizamos um loop com map para imprimir os dados da API de forma dinâmica
+{items && items.map((product) => (
+    <li key={product.id}>{product.name} - {product.price}</li>;
+))};
+# Adicionamos uma validação "items &&" pois nosso useState inicial foi null
+# A validação consiste em quando os items forem preenchidos executa o map
+
+
+Refatorando o POST:
+
+
+. Utilizaremos o mesmo custom hook para incluir a etapa de POST
+. Vamos criar um novo useEffect e exportaremos a aplicação
+. Quando ocorrer o POST, adicionaremos o produto
+. Nem sempre reutilizar o hook é a melhor estratégia, porém, em alguns casos sim
+
+# Criamos um novo state para receber a configuração POST
+const [config, setConfig] = useState(null); # Configurar os headers/body 
+const [method, setMethod] = useState(null); # Configurar o method
+const [callFetch, setCallFetch] = useState(false); # Configurar para mapeamos a aplicação
+
+    useEffect(() => {
+        const fetchData = async () => { # Cria-se uma função assíncrona para buscar os dados da API
+            const res = await fetch(url);
+            const json = await res.json();
+            setData(json);
+        }
+        fetchData(); # Chama a função para executá-la
+    }, [url, callFetch]); # O callFetch é adicionado para sempre atualizar quando for chamado
+
+# Refatorando o POST
+useEffect(() => {
+    const httpRequest = async () => {
+        if(method === "POST") {
+            let fetchOptions = [url, config]; # Deixando o useEffect dinâmico, caso haja url/config diferentes
+            const res = await fetch(...fetchOptions);
+            const json = await res.json();
+            setCallFetch(json); # Atribuimos ao callFetch os dados json
+        };
+    };
+    httpRequest() # Chamamos a função para ser executada
+}, [config, method, url]) # Será monitorado as configs, para verificar se estão sendo alteradas!
+
+# Para não precisar informar sempre as configurações da requisição, faremos uma função para isso
+const httpConfig = (data, method) {
+    if (method === "POST") {
+        setConfig({
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data);
+        })
+        setMethod(method);
+    };
+};
+
+# Exportamos junto com o data
+return { data, httpConfig };
+
+# Utilizamos o hook e dizemos da onde iremos utilizar
+const { data, httpConfig } = useFetch(url);
+
+# Utilizando o httpConfig
+httpConfig(product, "POST") # product são os dados e "POST" o método
+
+
+Estado de Loading:
+
+
+. Quando fizermos uma requisição para APIs é normal que haja um intervalo de resposta
+. Podemos simular isso no nosso hook, visto que nossa API é interna e o tempo de resposta é baixo
+. Identificar quando começar e termina o Estado
+
+# Criamos um state para salvar o componente de loading
+const [loading, setLoading] = useState(false);
+
+# Adicionamos o loading no useEffect do fetchData
+
+# useEffect(() => {
+#     const fetchData = async () => {
+        setLoading(true) # Enquanto não carrega os dados, o loading será true
+#         const res = await fetch(url);
+#         const json = await res.json();
+#         setData(json);
+        setLoading(false) # após carregar os dados, o loading volta a ser false
+#     }
+#     fetchData();
+# }, [url, callFetch]); 
+
+# Exportamos junto com o data e httpConfig
+return { data, httpConfig, loading };
+
+# Utilizamos o hook e dizemos da onde iremos utilizar
+const { data: items, httpConfig, loading } = useFetch(url);
+
+# Utilizamos o loading no loop com map para imprimir os dados da API de forma dinâmica
+{loading && <p>Carregando os dados...</p>}
+# {items && items.map((product) => (
+#     <li key={product.id}>{product.name} - {product.price}</li>;
+# ))};
+
+# Podemos adicionar também este loading ao botão para impedir que o usuário envie os dados mais de uma vez
+{!loading && <input type="button" value="Criar" />;}
+# Para ficar mais agradável podemos colocar uma mensagem para o usuário enquanto carrega os dados
+# Este aviso precisa vir antes do loading de impedir dois cliques no botão
+{loading && <input type="button" value="Aguarde" />;}
+
+
+Tratando Erros:
+
+
+. Podemos tratar os erros das requisições por meio de um "try/catch"
+. Além de pegar os dados do erro, também podemos alterar um state para imprimir um elemento para o usuário
+. Desta maneira é possível prever alguns cenários (resgate de dados, carregamento, erros)
+
+# Criando um state para receber os dados dos erros
+const [error, setError] = useState(null)
+
+# O try/catch fica após o loading dos dados
+
+# useEffect(() => {
+#     const fetchData = async () => {
+    # setLoading(true) # Enquanto não carrega os dados, o loading será true
+    try {
+    #         const res = await fetch(url);
+    #         const json = await res.json();
+    #         setData(json);
+    } catch (error) {
+        setError(`Ocorreu um erro no carregamento dos dados!`)
+    }
+            # setLoading(false) # após carregar os dados, o loading volta a ser false
+    #     }
+    #     fetchData();
+    # }, [url, callFetch]);
+
+# Exportamos o "error" para utilizarmos na função
+return { data, httpConfig, loading, error };
+
+# Utilizamos o hook e dizemos da onde iremos utilizar
+const { data: items, httpConfig, loading, error } = useFetch(url);
+
+# Podemos utilizá-lo no momento em que estivermos carregando os dados
+
+# {loading && <p>Carregando os dados...</p>}
+{error && <p>{error}</p>} # A mensagem so será exibida se existir algum erro!
+
+
+Deletando Arquivos do Banco de Dados (API):
+
+
+# Criamos um state para armazenar os dados de id dos produtos
+const [itemId, setItemId] = useState(null);
+
+# Adicionamos um if/else a função de request dos dados, para passar a ter condição de DELETE
+
+# const httpConfig = (data, method) => {
+#     if (method === "POST") {
+#       setConfig({
+#         method,
+#         headers: {
+#           "Content-Type": "application/json",
+#         },
+#         body: JSON.stringify(data),
+#       });
+#       setMethod(method);
+   } else if (method === "DELETE") {
+      // 8 - Handle remove
+      setConfig({
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setMethod(method); # method passa a receber o novo método DELETE
+      setItemId(data); # itemId passa a receber os dados
+    }
+  };
+
+# Adicionamos um novo else/if na função de refatoramento dos dados, para passar a ter condição de DELETE
+
+# useEffect(() => {
+#     const httpRequest = async () => {
+#       let json;
+
+#       if (method === "POST") {
+#         let fetchOptions = [url, config];
+#         const res = await fetch(...fetchOptions);
+#         json = await res.json();
+#         setCallFetch(json);
+      } else if (method === "DELETE") {
+        let fetchDeleteOptions = `${url}/${itemId}`; # Criamos uma URL para buscar o id do produto
+        const res = await fetch(fetchDeleteOptions, config); # Adicionamos esta url no fetch
+        json = await res.json(); # transformamos os dados em objeto
+        setCallFetch(json); # passamos os dados para ser chamado pelo callFetch
+      }
+    };
+    httpRequest(); # Executamos a função
+  }, [config, method, url, itemId]); # itemId adicionado para ser acompanhado
+
+
+
