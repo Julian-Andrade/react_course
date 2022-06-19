@@ -1,0 +1,150 @@
+/* Font Family - Soleil */
+@import url("https://use.typekit.net/xgd1mif.css");
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: soleil, sans-serif;
+}
+
+body {
+  background-color: #f6fcff;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #5850ec;
+  text-align: center;
+  margin-top: 2em;
+}
+
+p {
+  color: #161e2e;
+  margin: 2em;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #aaa;
+}
+
+input:focus,
+textearea:focus {
+  outline: none;
+}
+
+a,
+nav button {
+  background-color: transparent;
+  border: none;
+  color: #f6fcff;
+  transition: 0.4s;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #5850ec;
+}
+
+nav button:hover {
+  color: #8be0da;
+}
+
+/* Form Style Global */
+
+form {
+  max-width: 40%;
+  margin: 0 auto;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+label span {
+  margin-bottom: 0.3em;
+  font-weight: bold;
+  text-align: left;
+}
+
+input,
+textarea {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 0.8em 0;
+  background-color: transparent;
+}
+
+/* Default Button */
+
+.btn {
+  background-color: #5850ec;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  width: 120px;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1em;
+}
+
+.btn:hover {
+  background-color: #a0a0fa;
+  color: #fff;
+}
+
+/* Dark Button */
+
+.btn.btn-dark {
+  background-color: #161e2e;
+  border-radius: 0;
+}
+
+/* Outline Button */
+
+.btn.btn-outline {
+  background-color: transparent;
+  border-radius: 0;
+  color: #161e2e;
+  border: 1px solid #161e2e;
+  padding: 7px 30px;
+  transition: 0.4s;
+}
+
+.btn.btn-outline:hover {
+  background-color: #161e2e;
+  color: #fff;
+}
+
+/* Danger Button */
+
+.btn.btn-danger:hover {
+  background-color: #fc4454;
+}
+
+/* Disabled Button */
+
+button[disabled] {
+  background-color: #aaa;
+}
+
+/* Container Styles */
+/* Use for error message in the system */
+
+.container .error {
+  color: #fc4454;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 10px;
+}

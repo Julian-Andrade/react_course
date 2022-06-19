@@ -1,0 +1,16 @@
+.footer {
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #efeefe;
+}
+
+.footer h2 {
+  color: #5850ec;
+}
+
+.footer p {
+  color: #161e2e;
+}

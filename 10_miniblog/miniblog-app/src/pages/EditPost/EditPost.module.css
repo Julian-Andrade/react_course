@@ -1,0 +1,17 @@
+.edit_post {
+  text-align: center;
+}
+
+.edit_post h3 {
+  margin-top: 1em;
+  color: #453ecc;
+}
+
+.edit_post p {
+  margin-top: 1em;
+}
+
+.edit_post img {
+  max-width: 700px;
+  margin-bottom: 1em;
+}

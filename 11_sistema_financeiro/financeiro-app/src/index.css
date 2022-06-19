@@ -1,0 +1,165 @@
+/* Font Family - Soleil */
+@import url("https://use.typekit.net/xgd1mif.css");
+
+
+/* Colors of Project */
+:root {
+  --cor0: #023E73;
+  --cor1: #023059;
+  --cor2: #6387A6;
+  --cor3: #BF925A;
+  --cor4: #F2F2F2;
+  --cor5: #C0C0C0;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: soleil, sans-serif;
+}
+
+body {
+  background-color: #f6fcff;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--cor0);
+  text-align: center;
+  margin-top: 2em;
+}
+
+p {
+  color: #161e2e;
+  margin: 2em;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--cor5);
+}
+
+input:focus,
+textearea:focus {
+  outline: none;
+}
+
+a,
+nav button {
+  background-color: transparent;
+  border: none;
+  color: var(--cor0);
+  transition: 0.4s;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+nav span {
+  color: var(--cor3);
+  transition: 0.4s;
+}
+
+a:hover,
+nav button:hover,
+nav span:hover {
+  color: var(--cor3);
+}
+
+/* Form Style Global */
+
+form {
+  max-width: 40%;
+  margin: 0 auto;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+label span {
+  margin-bottom: 0.3em;
+  font-weight: bold;
+  text-align: left;
+}
+
+input,
+textarea {
+  border: none;
+  border-bottom: 1px solid var(--cor5);
+  padding: 0.8em 0;
+  background-color: transparent;
+}
+
+/* Default Button */
+
+.btn {
+  background-color: var(--cor1);
+  color: var(--cor4);
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 120px;
+  font-weight: bold;
+  transition: 0.4s;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1em;
+}
+
+.btn:hover {
+  background-color: var(--cor0);
+  color: var(--cor4);
+}
+
+/* Dark Button */
+
+.btn.btn-dark {
+  background-color: #000;
+  border-radius: 0;
+}
+
+/* Outline Button */
+
+.btn.btn-outline {
+  background-color: transparent;
+  border-radius: 0;
+  color: #000;
+  border: 1px solid #000;
+  padding: 7px 30px;
+}
+
+.btn.btn-outline:hover {
+  background-color: #000;
+}
+
+/* Danger Button */
+
+.btn.btn-danger:hover {
+  background-color: #fc4454;
+}
+
+/* Disabled Button */
+
+button[disabled] {
+  background-color: var(--cor5);
+}
+
+/* Container Styles */
+/* Use for error message in the system */
+
+.container .error {
+  color: #fc4454;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
