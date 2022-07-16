@@ -1,0 +1,29 @@
+React Hooks - Hooks = Ganchos
+
+(useState)
+
+1.0 - useState
+1.0.1 - O useState é um dos principais hooks do React;
+1.0.2 - O principal propósito é gerenciar valores;
+1.0.3 - Poderemos consultar um valor e alterá-lo;
+1.0.4 - Isso nos permite criar componentes dinâmicos, o que não acontece com variáveis;
+1.0.5 - Apesar da alteração aparecer no console com a variável, o useState já altera o valor na tela;
+
+1.1 - useState e inputs
+1.1.1 - Atrelando o useState a um input podemos fazer algumas ações;
+1.1.2 - Alteração de um state por evento de (onChange);
+1.1.3 - Limpeza dos inputs (Controlled Input);
+1.1.4 - Após preenchimento total do form, unir os states e fazer um envio dos dados para o back-end;
+
+(useReducer)
+
+2.0 - useReducer
+2.0.1 - O useReducer tem a mesma função do useState, ele serve para gerenciar valores;
+2.0.2 - A diferença entre o useReducer e o useState é que podemos executar a função na hora da alteração do valor;
+2.0.3 - O useReducer recebe um valor para gerenciar e uma função para alterar o valor;
+2.0.4 - O useReducer geralmente é utilizado para operações mais complexas, utilizando estrutura de (Switch);
+
+
+
+
+

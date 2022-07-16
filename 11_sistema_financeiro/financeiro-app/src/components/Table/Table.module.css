@@ -1,0 +1,39 @@
+.noclients {
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: var(--cor0);
+  color: var(--cor4);
+  height: 45px;
+  border-bottom: 3px solid var(--cor3);
+  text-transform: uppercase;
+}
+
+tr {
+  text-transform: uppercase;
+}
+
+td {
+  height: 45px;
+  font-size: 1em;
+}
+
+tr:nth-child(even) {
+  background-color: var(--cor4);
+}
+
+.table_name {
+  text-align: justify;
+}
+
+td button {
+  margin-right: 0.5em;
+}

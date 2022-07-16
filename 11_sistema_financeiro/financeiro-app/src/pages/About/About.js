@@ -7,15 +7,13 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <div className={styles.about}>
-      <h2>
-        Sobre o Sistema <span>Financeiro</span>
-      </h2>
+      <h1>Sistema Financeiro</h1>
       <p>
-        Este projeto consiste em um <span>Sistema Financeiro</span> criado em React
-        no front-end e utilizando o Google Firebase para o back-end.
+        Este projeto consiste em um <span>Sistema Financeiro</span> criado em
+        React no front-end e utilizando o Google Firebase para o back-end.
       </p>
-      <Link to="/create/entry" className="btn">
-        Sistema
+      <Link to="/" className="btn">
+        Home
       </Link>
     </div>
   );

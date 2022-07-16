@@ -1,0 +1,33 @@
+.card {
+  background-color: #fff;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  max-width: 100%;
+  margin-top: 3em;
+  width: 500px;
+}
+
+.card_left {
+  background-color: var(--cor1);
+  color: #fff;
+  padding: 1.5em;
+  max-width: 250px;
+}
+
+.card_body {
+  padding: 1em;
+  position: relative;
+  width: 100%;
+}
+
+.card h2 {
+  margin-top: 0px;
+}
+
+.card p {
+  margin: 2em;
+}
+
+button {
+  margin: 0 auto;
+}

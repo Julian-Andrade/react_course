@@ -1,0 +1,13 @@
+.container_client h3 {
+  margin-bottom: 1em;
+  text-align: justify;
+}
+
+.container_client button {
+  width: 150px;
+  margin-right: 2em;
+}
+
+.button_client {
+  text-align: center;
+}

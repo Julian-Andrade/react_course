@@ -1,0 +1,13 @@
+.container_provider h3 {
+    margin-bottom: 1em;
+    text-align: justify;
+}
+
+.container_provider button {  
+  width: 150px;
+  margin-right: 2em;
+}
+
+.button_provider {
+  text-align: center;
+}

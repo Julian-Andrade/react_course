@@ -12,7 +12,7 @@ const firebaseConfig = {
   projectId: "andralima-react",
   storageBucket: "andralima-react.appspot.com",
   messagingSenderId: "486673951585",
-  appId: "1:486673951585:web:95a9e4c33f3cc26c8d3320"
+  appId: "1:486673951585:web:95a9e4c33f3cc26c8d3320",
 };
 
 // Initialize Firebase

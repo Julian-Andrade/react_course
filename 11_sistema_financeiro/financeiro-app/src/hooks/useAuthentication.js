@@ -1,6 +1,4 @@
 // Firebase
-import { db } from "../firebase/config";
-
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -11,6 +9,8 @@ import {
 
 // Hooks
 import { useState, useEffect } from "react";
+
+// React Hook
 
 export const useAuthentication = () => {
   const [error, setError] = useState(null);
@@ -36,7 +36,31 @@ export const useAuthentication = () => {
     checkIfIsCancelled();
     signOut(auth);
   };
-  // Logout  
+  // Logout
+
+
+  // Login
+  const login = async (data) => {
+    checkIfIsCancelled();
+    setLoading(true);
+    setError("");
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      setLoading(false);
+    } catch (error) {
+      let systemErrorMessage;
+      if (error.message.includes("user-not-found")) {
+        systemErrorMessage = `Usuário não cadastrado.`;
+      } else if (error.message.includes("wrong-password")) {
+        systemErrorMessage = `Senha incorreta.`;
+      } else {
+        systemErrorMessage = `Ocorreu um erro, por favor tente mais tarde.`;
+      }
+      setError(systemErrorMessage);
+    }
+    setLoading(false);
+  };
+  // Login
 
   useEffect(() => {
     return () => setCancelled(true);
@@ -83,6 +107,7 @@ export const useAuthentication = () => {
     createUser,
     error,
     loading,
-    logout
+    logout,
+    login,
   };
 };

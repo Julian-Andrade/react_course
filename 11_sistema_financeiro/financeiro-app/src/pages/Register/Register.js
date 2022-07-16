@@ -3,7 +3,10 @@ import styles from "./Register.module.css";
 
 // Hooks
 import { useState, useEffect } from "react";
-import { useAuthentication } from "../../hooks/useAuthenticator";
+import { useAuthentication } from "../../hooks/useAuthentication";
+
+// React Router
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   // 1 - States p/ formulário / States for form
@@ -15,6 +18,9 @@ const Register = () => {
 
   // 2 - Importar os hooks de autenticação / Import Hook Authenticator
   const { createUser, error: authError, loading } = useAuthentication();
+
+  // 3 - Redirect when finished registration / Redirecionar quando finalizar o registro
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,9 +36,11 @@ const Register = () => {
       return;
     }
 
-    const res = await createUser(user)
+    const res = await createUser(user);
 
     console.log(res);
+
+    navigate("/dashboard");
   };
 
   useEffect(() => {
@@ -43,8 +51,8 @@ const Register = () => {
 
   return (
     <div className={styles.register}>
-      <h1>Cadastre-se para acessar a aplicação</h1>
-      <p>Preencha os dados abaixo</p>
+      <h1>Cadastra-se para utilizar o sistema</h1>
+      <p>Crie o seu usário e senha preenchendo os campos abaixo</p>
       <form onSubmit={handleSubmit}>
         <label>
           <span>Nome:</span>
@@ -93,7 +101,7 @@ const Register = () => {
         {!loading && <button className="btn">Cadastrar</button>}
         {loading && (
           <button className="btn" disabled>
-            Aguade...
+            Aguarde...
           </button>
         )}
         {error && <p className="error">{error}</p>}

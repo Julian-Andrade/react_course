@@ -3,8 +3,8 @@ import styles from "./Home.module.css";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className={styles.home}>
+      <h2>Bem Vindo ao Sistema Financeiro</h2>
     </div>
   );
 };

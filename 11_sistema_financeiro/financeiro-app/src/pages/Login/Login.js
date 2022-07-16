@@ -3,7 +3,10 @@ import styles from "./Login.module.css";
 
 // Hooks
 import { useState, useEffect } from "react";
-import { useAuthentication } from "../../hooks/useAuthenticator";
+import { useAuthentication } from "../../hooks/useAuthentication";
+
+// React Router
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   // 1 - States p/ formulário / States for form
@@ -12,7 +15,10 @@ const Login = () => {
   const [error, setError] = useState("");
 
   // 2 - Importar os hooks de autenticação / Import Hook Authenticator
-  const { createUser, error: authError, loading } = useAuthentication();
+  const { login, error: authError, loading } = useAuthentication();
+
+  // 3 - useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,9 +28,12 @@ const Login = () => {
       password,
     };
 
-    const res = await createUser(user);
+    const res = await login(user);
 
     console.log(res);
+
+    // Redirect to Dashboard
+    navigate("/dashboard");
   };
 
   useEffect(() => {
@@ -32,6 +41,7 @@ const Login = () => {
       setError(authError);
     }
   }, [authError]);
+
   return (
     <div className={styles.login}>
       <h1>Entrar</h1>
@@ -59,7 +69,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        {!loading && <button className="btn">Cadastrar</button>}
+        {!loading && <button className="btn">Entrar</button>}
         {loading && (
           <button className="btn" disabled>
             Aguarde...

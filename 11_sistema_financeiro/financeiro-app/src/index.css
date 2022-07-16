@@ -1,15 +1,15 @@
 /* Font Family - Soleil */
 @import url("https://use.typekit.net/xgd1mif.css");
 
-
 /* Colors of Project */
 :root {
-  --cor0: #023E73;
+  --cor0: #023e73;
   --cor1: #023059;
-  --cor2: #6387A6;
-  --cor3: #BF925A;
-  --cor4: #F2F2F2;
-  --cor5: #C0C0C0;
+  --cor2: #6387a6;
+  --cor3: #bf925a;
+  --cor4: #f2f2f2;
+  --cor5: #999999;
+  --danger: #fc4454;
 }
 
 * {
@@ -37,51 +37,23 @@ h4 {
 p {
   color: #161e2e;
   margin: 2em;
+  text-align: center;
 }
 
-input::placeholder,
-textarea::placeholder {
-  color: var(--cor5);
-}
-
-input:focus,
-textearea:focus {
-  outline: none;
-}
-
-a,
-nav button {
-  background-color: transparent;
-  border: none;
-  color: var(--cor0);
-  transition: 0.4s;
-  font-weight: bold;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-nav span {
-  color: var(--cor3);
-  transition: 0.4s;
-}
-
-a:hover,
-nav button:hover,
-nav span:hover {
-  color: var(--cor3);
-}
-
-/* Form Style Global */
+/* Default Forms */
 
 form {
-  max-width: 40%;
+  width: 40%;
   margin: 0 auto;
+  text-align: center;
 }
 
 label {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  text-align: justify;
+  font-weight: bold;
 }
 
 label span {
@@ -90,12 +62,34 @@ label span {
   text-align: left;
 }
 
-input,
-textarea {
+input {
   border: none;
-  border-bottom: 1px solid var(--cor5);
-  padding: 0.8em 0;
-  background-color: transparent;
+  padding: 0.8em 0.5em;
+  background-color: var(--cor4);
+  color: var(--cor5);
+  font-size: 0.9em;
+  width: 100%;
+  margin-bottom: 1em;
+  text-transform: uppercase;
+}
+
+input[type="checkbox"] {
+  margin-bottom: 0;
+}
+
+input::placeholder {
+  color: var(--cor5);
+}
+
+select {
+  border: none;
+  padding: 0.8em 0.5em;
+  background-color: var(--cor4);
+  color: var(--cor5);
+  font-size: 0.9em;
+  width: 100%;
+  margin-bottom: 1em;
+  text-transform: uppercase;
 }
 
 /* Default Button */
@@ -105,7 +99,6 @@ textarea {
   color: var(--cor4);
   text-align: center;
   cursor: pointer;
-  border-radius: 10px;
   width: 120px;
   font-weight: bold;
   transition: 0.4s;
@@ -123,14 +116,12 @@ textarea {
 
 .btn.btn-dark {
   background-color: #000;
-  border-radius: 0;
 }
 
 /* Outline Button */
 
 .btn.btn-outline {
   background-color: transparent;
-  border-radius: 0;
   color: #000;
   border: 1px solid #000;
   padding: 7px 30px;
@@ -143,7 +134,7 @@ textarea {
 /* Danger Button */
 
 .btn.btn-danger:hover {
-  background-color: #fc4454;
+  background-color: var(--danger);
 }
 
 /* Disabled Button */
@@ -152,14 +143,63 @@ button[disabled] {
   background-color: var(--cor5);
 }
 
+/* Table Button */
+
+.btn-table {
+  background-color: var(--cor0);
+  color: var(--cor4);
+  text-align: center;
+  cursor: pointer;
+  width: 100px;
+  font-weight: bold;
+  transition: 0.4s;
+  border: 1px solid var(--cor0);
+  padding: 5px 15px;
+  font-size: 1em;
+}
+
+.btn-table:hover {
+  color: var(--cor4);
+  background-color: var(--cor3);
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: var(--danger);
+  border: none;
+}
+
+/* Card Button */
+
+.btn-card {
+  display: flex;
+  align-items: center;
+  background-color: var(--cor1);
+  border: 0;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 25px;
+  bottom: 30px;
+  right: 30px;
+  letter-spacing: 1px;
+}
+
+.btn-card svg {
+  margin-right: 0.5em;
+}
+
+.btn-card:hover {
+  background-color: var(--cor3);
+}
+
 /* Container Styles */
 /* Use for error message in the system */
 
 .container .error {
-  color: #fc4454;
+  color: var(--danger);
   background-color: #f8d7da;
   border: 1px solid #f5c6cb;
   padding: 5px;
-  border-radius: 5px;
   margin-top: 10px;
 }

@@ -1,0 +1,7 @@
+.create_entry {
+  text-align: center;
+}
+
+.create_entry textarea {
+  resize: none;
+}
